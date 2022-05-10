@@ -1,12 +1,12 @@
 import React from 'react';
 
-const ServiceCard = () => {
+const ServiceCard = ({ img, title, text }) => {
     return (
-        <div className="card flex-col card-side bg-base-100 shadow-xl">
-            <figure><img src="https://api.lorem.space/image/album?w=400&h=400" alt="Album" /></figure>
+        <div className="card flex-col items-center justify-center card-side bg-base-100 mx-6 shadow-xl">
+            <figure className=' max:w-[155px]'><img className='w-100' src={img} alt="Album" /></figure>
             <div className="card-body text-center">
-                <h2 className="card-title justify-center    ">New album is released!</h2>
-                <p>Click the button to listen on Spotiwhy app.</p>
+                <h2 className="card-title justify-center">{title}</h2>
+                <p className='mx-4'>{text}</p>
             </div>
         </div>
     );
