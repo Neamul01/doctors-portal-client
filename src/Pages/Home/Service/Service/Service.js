@@ -7,8 +7,9 @@ import whitening from '../../../../assets/images/whitening.png';
 
 const Service = () => {
     return (
-        <div>
-            <div className=' md:mx-20 mx-4 mt-12'>
+        <div className=' md:mx-20 mx-4 mt-12'>
+            {/* service card area  */}
+            <div >
                 <p className='uppercase text-primary'>OUR SERVICES</p>
                 <h2 className="text-3xl font-normal mb-16">Services We Provide</h2>
                 <div className='grid md:grid-cols-3 grid-cols-1 gap-8'>
@@ -29,7 +30,11 @@ const Service = () => {
                     ></ServiceCard>
                 </div>
             </div>
-            <ServiceBanner></ServiceBanner>
+
+            {/* service banner area  */}
+            <div className='md:mt-10 mt-6 md:px-20 '>
+                <ServiceBanner></ServiceBanner>
+            </div>
         </div>
     );
 };
