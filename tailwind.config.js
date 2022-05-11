@@ -2,11 +2,9 @@ module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
     extend: {
-      // backgroundImage: (theme) => ({
-
-      //   'heroimg':
-      //     "linear-gradient(to right bottom, rgba(255, 255, 255,0.4), rgba(255, 255, 255,0.4), url('https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg')",
-      // }),
+      backgroundImage: {
+        'hero-pattern': "linear-gradient(to right bottom, rgba(255, 255, 255,0.4), rgba(255, 255, 255,0.4)), url('./assets/images/bg.png')",
+      },
 
     },
   },

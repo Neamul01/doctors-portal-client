@@ -5,11 +5,11 @@ import bg from '../../../assets/images/bg.png'
 const Banner = () => {
     return (
         <div
-            style={{
-                backgroundImage: `url(${bg})`,
-                backgroundSize: 'cover'
-            }}
-            className="hero min-h-screen pt-0"
+            // style={{
+            //     backgroundImage: `url(${bg})`,
+            //     backgroundSize: 'cover'
+            // }}
+            className="hero bg-hero-pattern min-h-screen pt-0"
         >
             <div className="hero-content p-0 flex-col gap-16 lg:flex-row-reverse mb-6 mx-12 ">
                 <img alt='chair' className='max-w-full max-h-screen md:max-w-[594px] md:max-h-[355px]' src={chair} />
