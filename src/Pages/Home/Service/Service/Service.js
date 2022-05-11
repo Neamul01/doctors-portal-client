@@ -7,7 +7,7 @@ import whitening from '../../../../assets/images/whitening.png';
 
 const Service = () => {
     return (
-        <div className=' md:mx-20 mx-4 mt-12'>
+        <section className=' mt-12'>
             {/* service card area  */}
             <div >
                 <p className='uppercase text-primary'>OUR SERVICES</p>
@@ -35,7 +35,7 @@ const Service = () => {
             <div className='md:mt-10 mt-6 md:px-20 '>
                 <ServiceBanner></ServiceBanner>
             </div>
-        </div>
+        </section>
     );
 };
 
