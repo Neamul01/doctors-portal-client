@@ -13,7 +13,9 @@ import Signup from './Pages/Login/Signup/Signup';
 function App() {
   return (
     <div className="App">
-      <Navbar></Navbar>
+      <div className='sticky top-0 z-10 backdrop-blur-md'>
+        <Navbar></Navbar>
+      </div>
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/about' element={<About></About>}></Route>
