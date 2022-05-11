@@ -11,7 +11,7 @@ const Footer = () => {
                 backgroundPosition: 'center'
             }}
         >
-            <div className='footer p-10 pl-32 mt-6 text-gray-700'>
+            <div className='footer grid-cols-2 md:p-10 md:pl-32 mt-6 text-gray-700'>
                 <div>
                     <span className="footer-title">Services</span>
                     <a className="link link-hover" href='!#'>Branding</a>

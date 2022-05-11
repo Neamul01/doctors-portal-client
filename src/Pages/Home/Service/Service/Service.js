@@ -11,8 +11,8 @@ const Service = () => {
             {/* service card area  */}
             <div >
                 <p className='uppercase text-primary'>OUR SERVICES</p>
-                <h2 className="text-3xl font-normal mb-16">Services We Provide</h2>
-                <div className='grid md:grid-cols-3 grid-cols-1 gap-8'>
+                <h2 className="md:text-3xl font-normal mb-16">Services We Provide</h2>
+                <div className='grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-8'>
                     <ServiceCard
                         img={flourida}
                         title={'Fluoride Treatment'}

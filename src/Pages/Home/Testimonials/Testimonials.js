@@ -31,7 +31,7 @@ const Testimonials = () => {
     ]
     return (
         <section className='my-28'>
-            <div className='flex justify-between px-8'>
+            <div className='flex justify-between md:px-8'>
                 <div className='text-left'>
                     <h2 className='capitalize text-xl text-primary'> Testimonial</h2>
                     <h3 className="text-3xl capitalize">What Our Patients Says</h3></div>
@@ -39,7 +39,7 @@ const Testimonials = () => {
                     <img className='md:max-w-[192px] md:max-h-[152px] max-w-98 max-h-[76]' src={quote} alt="" />
                 </div>
             </div>
-            <div className='flex gap-14 mt-14'>
+            <div className='grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-14 mt-14'>
                 {
                     testimonials.map(testimonial => <Testimonial key={testimonial._id} testimonial={testimonial}></Testimonial>)
                 }

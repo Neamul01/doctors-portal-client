@@ -4,12 +4,12 @@ const Testimonial = ({ testimonial }) => {
     const { name, address, describsion, image } = testimonial;
 
     return (
-        <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="card max:w-96 bg-base-100 shadow-xl">
             <div className="card-body">
                 <p className='text-left mt-6'>{describsion}</p>
                 <div className='flex items-center mt-6'>
                     <div className="avatar">
-                        <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                        <div className="max-w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                             <img src={image} alt='person' />
                         </div>
                     </div>
