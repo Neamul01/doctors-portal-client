@@ -8,8 +8,8 @@ const Testimonial = ({ testimonial }) => {
             <div className="card-body">
                 <p className='text-left mt-6'>{describsion}</p>
                 <div className='flex items-center mt-6'>
-                    <div class="avatar">
-                        <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                    <div className="avatar">
+                        <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                             <img src={image} alt='person' />
                         </div>
                     </div>
