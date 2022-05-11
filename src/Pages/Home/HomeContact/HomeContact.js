@@ -10,7 +10,7 @@ const HomeContact = () => {
                     <p className="text-3xl capitalize mb-12 mt-3">stay connected with us</p>
                     <input type="text" placeholder="Email Address" className="input w-full max-w-full mb-6" />
                     <input type="text" placeholder="Subject" className="input w-full max-w-full mb-6" />
-                    <textarea className="textarea w-full" placeholder="Your Message..."></textarea>
+                    <textarea className="textarea w-full h-28" placeholder="Your Message..."></textarea>
                     <button className="btn btn-primary capitalize mt-4 text-white bg-gradient-to-r from-secondary to-primary">Submit</button>
                 </div>
             </div>
