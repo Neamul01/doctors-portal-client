@@ -11,7 +11,7 @@ import Signup from './Pages/Login/Signup/Signup';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App md:mx-12 mx-4">
       {/* sticky top-0 z-10 backdrop-blur-md */}
       <div className=''>
         <Navbar></Navbar>
