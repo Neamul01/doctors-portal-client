@@ -4,8 +4,8 @@ import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import chair from '../../assets/images/chair.png'
 
-const AppointmentHero = () => {
-    const [date, setDate] = useState(new Date());
+const AppointmentHero = ({ date, setDate }) => {
+
     return (
         <div
             className="hero bg-hero-pattern bg-cover w-full min-h-screen pt-0"
@@ -18,7 +18,7 @@ const AppointmentHero = () => {
                         selected={date}
                         onSelect={setDate}
                     />
-                    <p className='md:ml-6'>You picked: {format(date, 'PP')}.</p>
+
                 </div>
             </div>
         </div >
