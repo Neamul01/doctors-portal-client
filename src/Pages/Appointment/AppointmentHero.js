@@ -18,7 +18,6 @@ const AppointmentHero = ({ date, setDate }) => {
                         selected={date}
                         onSelect={setDate}
                     />
-
                 </div>
             </div>
         </div >
