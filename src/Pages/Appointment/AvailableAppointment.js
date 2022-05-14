@@ -12,14 +12,14 @@ const AvailableAppointment = ({ date }) => {
     }, [])
 
     return (
-        <div>
-            <h4 className='text-xl text-center text-secondary'>You picked: {format(date, 'PP')}.</h4>
-            <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5'>
+        <section className='md:mb-32 mb-24 md:mt-24 mt-14'>
+            <h4 className='text-xl text-center text-secondary mb-12'>Available Appointment on {format(date, 'PP')}.</h4>
+            <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-x-5 gap-y-14 mt-24'>
                 {
                     services.map(service => <Service key={service._id} service={service}></Service>)
                 }
             </div>
-        </div>
+        </section>
     );
 };
 

@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'hero-pattern': "linear-gradient(to right bottom, rgba(255, 255, 255,0.4), rgba(255, 255, 255,0.4)), url('./assets/images/bg.png')",
+        'hero-pattern': "linear-gradient(0.5turn,rgba(255, 255, 255,0.5),rgba(255, 255, 255,0.0), rgba(255, 255, 255,0.9)), url('./assets/images/bg.png')",
         'appointment': " url('./assets/images/appointment.png')"
       },
 
