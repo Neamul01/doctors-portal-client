@@ -1,18 +1,38 @@
 import React from 'react';
+import { format } from 'date-fns';
 
-const BookingModal = ({ treatment }) => {
-    const { name } = treatment;
+const BookingModal = ({ treatment, date, setTreatment }) => {
+    const { name, slots } = treatment;
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        const slot = event.target.slot.value;
+        console.log(slot, name)
+        setTreatment(null)
+    }
+
     return (
         <div>
-            <input type="checkbox" id="booking-modal" class="modal-toggle" />
-            <div class="modal modal-bottom sm:modal-middle">
-                <div class="modal-box text-left">
-                    <label for="booking-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <h3 class="font-bold text-lg">{name} </h3>
-                    <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
-                    <div class="modal-action">
-                        <label for="my-modal-6" class="btn">Yay!</label>
+            <input type="checkbox" id="booking-modal" className="modal-toggle" />
+            <div className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box text-left">
+                    <div className='flex items-center'>
+                        <label htmlFor="booking-modal" className="btn my-2 mr-2 text-xl btn-circle absolute right-2 top-2">x</label>
+                        <h3 className="font-bold text-xl text-secondary">{name} </h3>
                     </div>
+
+                    <form onSubmit={handleSubmit} className=' mt-9'>
+                        <input type="text" value={format(date, 'PP')} disabled className="input my-3 input-bordered w-full max-w-full" />
+                        <select name='slot' type='select' className="input my-3 input-bordered w-full max-w-full">
+                            {
+                                slots.map(slot => <option key={slot} value={slot}>{slot}</option>)
+                            }
+                        </select>
+                        <input name='name' type="text" placeholder="Full Name" className="input my-3 input-bordered w-full max-w-full" />
+                        <input name='mobile' type="number" placeholder="Mobile Number" className="input my-3 input-bordered w-full max-w-full" />
+                        <input name='email' type="email" placeholder="Email" className="input mt-3 input-bordered w-full max-w-full" />
+                        <input type="submit" placeholder="Submit" className="btn btn-accent input mt-3 input-bordered w-full max-w-full" />
+                    </form>
                 </div>
             </div>
         </div>
