@@ -31,7 +31,9 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
                         <input name='name' type="text" placeholder="Full Name" className="input my-3 input-bordered w-full max-w-full" />
                         <input name='mobile' type="number" placeholder="Mobile Number" className="input my-3 input-bordered w-full max-w-full" />
                         <input name='email' type="email" placeholder="Email" className="input mt-3 input-bordered w-full max-w-full" />
-                        <input type="submit" placeholder="Submit" className="btn btn-accent input mt-3 input-bordered w-full max-w-full" />
+                        <input type="submit" placeholder="Submit"
+                            className="btn btn-accent input mt-3 input-bordered w-full max-w-full"
+                        />
                     </form>
                 </div>
             </div>
