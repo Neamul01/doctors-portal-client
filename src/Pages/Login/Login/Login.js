@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SocialLogin from '../SocialLogin';
 
 const Login = () => {
     return (
@@ -24,9 +25,7 @@ const Login = () => {
 
                     </div>
                     <div className="divider">OR</div>
-                    <div className='w-full'>
-                        <button className="btn w-full btn-outline">Continue With Google</button>
-                    </div>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>
