@@ -3,41 +3,97 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import LoadingSpinner from '../../Shared/LoadingSpinner';
 import SocialLogin from '../SocialLogin';
 
 const Login = () => {
     const [
         signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = data => {
-        // signInWithEmailAndPassword(email, pass);
+        const email = data.email;
+        const pass = data.password;
+        signInWithEmailAndPassword(email, pass);
+        console.log(email, pass)
     };
+    let signinError;
+
+    if (user) {
+        console.log(user)
+    }
+
+    if (loading) {
+        return <LoadingSpinner></LoadingSpinner>
+    }
+
+    if (error) {
+        signinError = <p className='text-red-500 text-left'><small>{error?.message}</small></p>
+    }
 
     return (
         <div className='flex h-screen justify-center items-center'>
             <div className="card w-96 bg-base-100 shadow-xl">
-                <div className="card-body">
+                <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                     <h2 className="card-title justify-center">Login</h2>
                     <div className='mt-5'>
                         <div className="form-control w-full">
                             <p className="label-text text-left">Email</p>
-                            <input type="email" placeholder="Email..." className="input input-bordered w-full max-w-xs" />
+                            <input
+                                type="email"
+                                placeholder="Email..."
+                                className="input input-bordered w-full max-w-xs"
+                                {...register("email",
+                                    {
+                                        required: {
+                                            value: true,
+                                            message: 'Email is Required..'
+                                        }
+                                    }
+                                )}
+                            />
+                            <label className="lable text-left">
+                                {errors.email?.type === 'required' && <small className='text-red-500'>{errors.email.message}</small>}
+                            </label>
                         </div>
                         <div className="form-control w-full max-w-xs mt-3">
                             <p className="label-text text-left">Password</p>
-                            <input type="password" placeholder="Password..." className="input input-bordered w-full max-w-xs" />
+                            <input
+                                type="password"
+                                placeholder="Password..."
+                                className="input input-bordered w-full max-w-xs"
+                                {...register("password",
+                                    {
+
+                                        required: {
+                                            value: true,
+                                            message: 'Password is Required...'
+                                        },
+                                        minLength: {
+                                            value: 6,
+                                            message: 'Length must be 6 or more..'
+                                        }
+
+                                    },
+
+                                )}
+                            />
+                            <label className="lable text-left">
+                                {errors.password?.type === 'required' && <small className='text-red-500'>{errors.password.message}</small>}
+                                {errors.password?.type === 'minLength' && <small className='text-red-500'>{errors.password.message}</small>}
+                            </label>
                         </div>
                         <p className="label mb-2">
                             <span className="label-text-alt">Forgot Password?</span>
                         </p>
-                        <button className="btn w-full mb-2">Login</button>
+                        {signinError}
+                        <input type='submit' value='Login' className="btn w-full mb-2" />
                         <span className="label-text-alt text-sm">New to Doctors Portal? <Link className='text-secondary' to={'/signup'}>Create New Account</Link></span>
 
                     </div>
                     <div className="divider">OR</div>
                     <SocialLogin></SocialLogin>
-                </div>
+                </form>
             </div>
         </div>
     );
