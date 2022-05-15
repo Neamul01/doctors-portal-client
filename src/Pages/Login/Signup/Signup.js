@@ -3,6 +3,7 @@ import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import LoadingSpinner from '../../Shared/LoadingSpinner';
 import SocialLogin from '../SocialLogin';
 
 const Signup = () => {
@@ -12,7 +13,20 @@ const Signup = () => {
     const onSubmit = async (data) => {
         const email = data.email;
         const pass = data.password;
-        // await createUserWithEmailAndPassword(email,pass);
+        await createUserWithEmailAndPassword(email, pass);
+    }
+    let signinError;
+
+    if (user) {
+        console.log(user)
+    }
+
+    if (loading) {
+        return <LoadingSpinner></LoadingSpinner>
+    }
+
+    if (error) {
+        signinError = <p className='text-red-500 text-left'><small>{error?.message}</small></p>
     }
 
     return (

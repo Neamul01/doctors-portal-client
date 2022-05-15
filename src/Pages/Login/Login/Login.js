@@ -15,7 +15,6 @@ const Login = () => {
         const email = data.email;
         const pass = data.password;
         signInWithEmailAndPassword(email, pass);
-        console.log(email, pass)
     };
     let signinError;
 
