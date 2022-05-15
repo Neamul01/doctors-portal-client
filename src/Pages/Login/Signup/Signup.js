@@ -10,20 +10,20 @@ const Signup = () => {
                     <h2 className="card-title justify-center">Signup</h2>
                     <div className='mt-5'>
                         <div className="form-control w-full">
-                            <lable className="label-text text-left">Name</lable>
+                            <p className="label-text text-left">Name</p>
                             <input type="text" placeholder="Your Name..." className="input input-bordered w-full max-w-xs" />
                         </div>
                         <div className="form-control w-full mt-3">
-                            <lable className="label-text text-left">Email</lable>
+                            <p className="label-text text-left">Email</p>
                             <input type="email" placeholder="Email..." className="input input-bordered w-full max-w-xs" />
                         </div>
                         <div className="form-control w-full max-w-xs mt-3">
-                            <lable className="label-text text-left">Password</lable>
+                            <p className="label-text text-left">Password</p>
                             <input type="password" placeholder="Password..." className="input input-bordered w-full max-w-xs" />
                         </div>
-                        <label className="label mb-2">
+                        <p className="label mb-2">
                             <span className="label-text-alt">Forgot Password?</span>
-                        </label>
+                        </p>
                         <button className="btn w-full mb-2">Login</button>
                         <span className="label-text-alt text-sm">Already have an Account? <Link className='text-secondary' to={'/login'}>Login</Link></span>
 
