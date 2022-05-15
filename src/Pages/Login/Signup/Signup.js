@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import LoadingSpinner from '../../Shared/LoadingSpinner';
 import SocialLogin from '../SocialLogin';
@@ -10,6 +10,10 @@ const Signup = () => {
     const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location?.state?.from?.pathname || '/';
 
     const onSubmit = async (data) => {
         const email = data.email;
@@ -20,7 +24,7 @@ const Signup = () => {
     let signinError;
 
     if (user) {
-        console.log(user)
+        navigate(from, { replace: true });
     }
 
     if (loading || updating) {

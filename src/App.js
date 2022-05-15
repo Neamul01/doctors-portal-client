@@ -8,6 +8,7 @@ import ContactUs from './Pages/ContactUs/ContactUs';
 import Reviews from './Pages/Reviews/Reviews';
 import Login from './Pages/Login/Login/Login';
 import Signup from './Pages/Login/Signup/Signup';
+import RequireAuth from './Pages/Shared/RequireAuth';
 
 function App() {
   return (
@@ -19,7 +20,11 @@ function App() {
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/about' element={<About></About>}></Route>
-        <Route path='/appointment' element={<Appointment></Appointment>}></Route>
+        <Route path='/appointment' element={
+          <RequireAuth>
+            <Appointment></Appointment>
+          </RequireAuth>
+        }></Route>
         <Route path='/contactus' element={<ContactUs></ContactUs>}></Route>
         <Route path='/reviews' element={<Reviews></Reviews>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
