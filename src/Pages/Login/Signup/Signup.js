@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
@@ -10,6 +10,7 @@ const Signup = () => {
     const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    const [sendEmailVerification, sending, varifyError] = useSendEmailVerification(auth);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -20,7 +21,10 @@ const Signup = () => {
         const pass = data.password;
         await createUserWithEmailAndPassword(email, pass);
         await updateProfile({ displayName: data.name })
+        await sendEmailVerification();
+        alert('Please check your inbox and varify email...')
     }
+
     let signinError;
 
     useEffect(() => {
@@ -29,11 +33,11 @@ const Signup = () => {
         }
     }, [user, from, navigate])
 
-    if (loading || updating) {
+    if (loading || updating || sending) {
         return <LoadingSpinner></LoadingSpinner>
     }
 
-    if (error || updateError) {
+    if (error || updateError || varifyError) {
         signinError = <p className='text-red-500 text-left'><small>{error?.message}</small></p>
     }
 
@@ -111,11 +115,8 @@ const Signup = () => {
                                 {errors.password?.type === 'minLength' && <small className='text-left text-red-500'>{errors.password.message}</small>}
                             </label>
                         </div>
-                        <p className="label mb-2">
-                            <small className="text-left label-text-alt">Forgot Password?</small>
-                        </p>
                         {signinError}
-                        <button className="btn w-full mb-2">Signup</button>
+                        <button className="btn w-full my-3">Signup</button>
                         <small className="text-left label-text-alt text-sm">Already have an Account? <Link className='text-secondary' to={'/login'}>Login</Link></small>
 
                     </div>

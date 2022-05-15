@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import React, { useEffect, useState } from 'react';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
@@ -9,16 +9,23 @@ import SocialLogin from '../SocialLogin';
 const Login = () => {
     const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(auth);
+    const [email, setEmail] = useState()
 
     const location = useLocation();
     const navigate = useNavigate();
     const from = location?.state?.from?.pathname || '/';
 
     const onSubmit = data => {
+        setEmail(data.email);
         const email = data.email;
         const pass = data.password;
         signInWithEmailAndPassword(email, pass);
     };
+
+    const handleForgotPass = () => {
+        sendPasswordResetEmail(email);
+    }
     let signinError;
 
     useEffect(() => {
@@ -27,11 +34,11 @@ const Login = () => {
         }
     }, [user, from, navigate])
 
-    if (loading) {
+    if (loading || sending) {
         return <LoadingSpinner></LoadingSpinner>
     }
 
-    if (error) {
+    if (error || resetError) {
         signinError = <p className='text-red-500 text-left'><small>{error?.message}</small></p>
     }
 
@@ -88,7 +95,10 @@ const Login = () => {
                             </label>
                         </div>
                         <p className="label mb-2">
-                            <span className="label-text-alt">Forgot Password?</span>
+                            <span
+                                onClick={handleForgotPass}
+                                className="label-text-alt"
+                            >Forgot Password?</span>
                         </p>
                         {signinError}
                         <input type='submit' value='Login' className="btn w-full mb-2" />
