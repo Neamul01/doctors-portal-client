@@ -1,8 +1,19 @@
 import React from 'react';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
+import auth from '../../../firebase.init';
 import SocialLogin from '../SocialLogin';
 
 const Login = () => {
+    const [
+        signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
+    const { register, handleSubmit } = useForm();
+
+    const onSubmit = data => {
+        // signInWithEmailAndPassword(email, pass);
+    };
+
     return (
         <div className='flex h-screen justify-center items-center'>
             <div className="card w-96 bg-base-100 shadow-xl">

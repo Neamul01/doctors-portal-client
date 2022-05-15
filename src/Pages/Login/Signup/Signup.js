@@ -1,12 +1,22 @@
 import React from 'react';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
+import auth from '../../../firebase.init';
 import SocialLogin from '../SocialLogin';
 
 const Signup = () => {
+    const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
+    const { register, handleSubmit } = useForm();
+
+    const onSubmit = async () => {
+        // await createUserWithEmailAndPassword(email,pass);
+    }
+
     return (
         <div className='flex h-screen justify-center items-center'>
             <div className="card w-96 bg-base-100 shadow-xl">
-                <div className="card-body">
+                <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                     <h2 className="card-title justify-center">Signup</h2>
                     <div className='mt-5'>
                         <div className="form-control w-full">
@@ -30,7 +40,7 @@ const Signup = () => {
                     </div>
                     <div className="divider">OR</div>
                     <SocialLogin></SocialLogin>
-                </div>
+                </form>
             </div>
         </div>
     );
