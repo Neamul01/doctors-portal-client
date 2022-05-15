@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -21,9 +21,11 @@ const Login = () => {
     };
     let signinError;
 
-    if (user) {
-        navigate(from, { replace: true });
-    }
+    useEffect(() => {
+        if (user) {
+            navigate(from, { replace: true });
+        }
+    }, [user, from, navigate])
 
     if (loading) {
         return <LoadingSpinner></LoadingSpinner>
