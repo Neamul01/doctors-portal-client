@@ -1,7 +1,16 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import auth from '../../../firebase.init';
 
 const Navbar = () => {
+    const [user] = useAuthState(auth);
+
+    const logout = () => {
+        signOut(auth);
+    };
+
     return (
         <div className="navbar justify-between px-16">
             <div className="navbar-start">
@@ -15,7 +24,12 @@ const Navbar = () => {
                         <li><Link to={'/appointment'}>Appointment</Link></li>
                         <li><Link to={'/reviews'}>Reviews</Link></li>
                         <li><Link to={'/contactus'}>Contact Us</Link></li>
-                        <Link to={'login'} className="btn btn-ghost font-normal">Login</Link>
+                        {user
+                            ?
+                            <li className="btn btn-ghost font-semibold">Sign Out</li>
+                            :
+                            <li><Link to={'login'} >Login</Link></li>
+                        }
                     </ul>
                 </div>
                 <Link to={'/'} className="btn btn-ghost normal-case text-xl">Doctors Portal</Link>
@@ -28,11 +42,18 @@ const Navbar = () => {
                         <li><Link to={'/appointment'}>Appointment</Link></li>
                         <li><Link to={'/reviews'}>Reviews</Link></li>
                         <li><Link to={'/contactus'}>Contact Us</Link></li>
+
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <Link to={'login'} className="btn btn-ghost font-normal">Login</Link>
-                </div>
+                {user ?
+                    <div className="navbar-end">
+                        <Link to={'login'} onClick={logout} className="btn btn-ghost font-semibold">Sign Out</Link>
+                    </div>
+                    :
+                    <div className="navbar-end">
+                        <Link to={'login'} className="btn btn-ghost font-semibold">Login</Link>
+                    </div>
+                }
             </div>
         </div>
     );

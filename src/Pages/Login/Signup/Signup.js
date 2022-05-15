@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import auth from '../../../firebase.init';
@@ -9,11 +9,13 @@ import SocialLogin from '../SocialLogin';
 const Signup = () => {
     const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
     const onSubmit = async (data) => {
         const email = data.email;
         const pass = data.password;
         await createUserWithEmailAndPassword(email, pass);
+        await updateProfile({ displayName: data.name })
     }
     let signinError;
 
@@ -21,11 +23,11 @@ const Signup = () => {
         console.log(user)
     }
 
-    if (loading) {
+    if (loading || updating) {
         return <LoadingSpinner></LoadingSpinner>
     }
 
-    if (error) {
+    if (error || updateError) {
         signinError = <p className='text-red-500 text-left'><small>{error?.message}</small></p>
     }
 
@@ -106,7 +108,8 @@ const Signup = () => {
                         <p className="label mb-2">
                             <small className="text-left label-text-alt">Forgot Password?</small>
                         </p>
-                        <button className="btn w-full mb-2">Login</button>
+                        {signinError}
+                        <button className="btn w-full mb-2">Signup</button>
                         <small className="text-left label-text-alt text-sm">Already have an Account? <Link className='text-secondary' to={'/login'}>Login</Link></small>
 
                     </div>
