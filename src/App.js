@@ -9,6 +9,8 @@ import Reviews from './Pages/Reviews/Reviews';
 import Login from './Pages/Login/Login/Login';
 import Signup from './Pages/Login/Signup/Signup';
 import RequireAuth from './Pages/Shared/RequireAuth';
+import React from 'react';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -30,6 +32,7 @@ function App() {
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<Signup></Signup>}></Route>
       </Routes>
+      <ToastContainer />
     </div>
   );
 }
