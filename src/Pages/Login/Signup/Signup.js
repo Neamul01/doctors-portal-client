@@ -3,6 +3,7 @@ import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateP
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import useToken from '../../../hooks/useToken';
 import LoadingSpinner from '../../Shared/LoadingSpinner';
 import SocialLogin from '../SocialLogin';
 
@@ -11,6 +12,7 @@ const Signup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const [sendEmailVerification, sending, varifyError] = useSendEmailVerification(auth);
+    const [token] = useToken(user);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -28,10 +30,10 @@ const Signup = () => {
     let signinError;
 
     useEffect(() => {
-        if (user) {
+        if (token) {
             navigate(from, { replace: true });
         }
-    }, [user, from, navigate])
+    }, [token, from, navigate])
 
     if (loading || updating || sending) {
         return <LoadingSpinner></LoadingSpinner>
