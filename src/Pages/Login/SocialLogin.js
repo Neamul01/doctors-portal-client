@@ -2,10 +2,12 @@ import React, { useEffect } from 'react';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init'
+import useToken from '../../hooks/useToken';
 import LoadingSpinner from '../Shared/LoadingSpinner';
 
 const SocialLogin = () => {
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+    const [token] = useToken(user);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -17,10 +19,10 @@ const SocialLogin = () => {
     let signinError;
 
     useEffect(() => {
-        if (user) {
+        if (token) {
             navigate(from, { replace: true });
         }
-    }, [user, from, navigate])
+    }, [token, from, navigate])
 
     if (loading) {
         return <LoadingSpinner></LoadingSpinner>
