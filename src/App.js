@@ -17,6 +17,7 @@ import MyReview from './Pages/Dashboard/MyReview';
 import MyHistory from "./Pages/Dashboard/MyHistory";
 import Users from './Pages/Dashboard/Users';
 import RequireAdmin from './Pages/Shared/RequireAdmin';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (

@@ -23,7 +23,7 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
             phone: event.target.mobile.value
         }
 
-        fetch('http://localhost:5000/booking', {
+        fetch('https://doctors-portal-2022.herokuapp.com/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
