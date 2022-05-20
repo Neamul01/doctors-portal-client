@@ -3,6 +3,7 @@ import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import useToken from '../../../hooks/useToken';
 import LoadingSpinner from '../../Shared/LoadingSpinner';
 import SocialLogin from '../SocialLogin';
 
@@ -10,6 +11,7 @@ const Login = () => {
     const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(auth);
+    const [token] = useToken(user);
     const [email, setEmail] = useState()
 
     const location = useLocation();
@@ -29,10 +31,10 @@ const Login = () => {
     let signinError;
 
     useEffect(() => {
-        if (user) {
+        if (token) {
             navigate(from, { replace: true });
         }
-    }, [user, from, navigate])
+    }, [token, from, navigate])
 
     if (loading || sending) {
         return <LoadingSpinner></LoadingSpinner>
