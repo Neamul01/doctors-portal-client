@@ -1,10 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
 import LoadingSpinner from '../Shared/LoadingSpinner';
 
 const AddDoctor = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const { data: services, isLoading } = useQuery('services', () => fetch('http://localhost:5000/services').then(res => res.json()));
 
     const iamgeStorageKey = '592b3549595874674f93cdc0a6df1773';
@@ -25,10 +26,30 @@ const AddDoctor = () => {
                     const doctor = {
                         name: data.name,
                         email: data.email,
-                        specialty: data.specialty
+                        specialty: data.specialty,
+                        img: img
                     }
+                    //send to database
+                    fetch('http://localhost:5000/doctor', {
+                        method: "POST",
+                        headers: {
+                            'content-type': 'application/json',
+                            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                        },
+                        body: JSON.stringify(doctor)
+                    })
+                        .then(res => res.json())
+                        .then(inserted => {
+                            if (inserted.insertedId) {
+                                toast.success('Doctor added successfully..')
+                                reset();
+                            }
+                            else {
+                                toast.error('failed to add doctor')
+                            }
+                        })
                 }
-                console.log('imagebb result', result)
+
             })
 
     }
