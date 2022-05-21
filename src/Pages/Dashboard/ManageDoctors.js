@@ -6,7 +6,7 @@ import DoctorRow from './DoctorRow';
 
 const ManageDoctors = () => {
     const [deletingDoctor, setDeletingDoctor] = useState(null);
-    const { data: doctors, isLoading, refetch } = useQuery('doctors', () => fetch('http://localhost:5000/doctor', {
+    const { data: doctors, isLoading, refetch } = useQuery('doctors', () => fetch('https://doctors-portal-2022.herokuapp.com/doctor', {
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
@@ -33,7 +33,7 @@ const ManageDoctors = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {doctors &&
+                        {doctors.length &&
                             doctors.map((doctor, index) => <DoctorRow
                                 key={doctor._id}
                                 doctor={doctor}

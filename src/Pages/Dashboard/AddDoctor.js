@@ -6,7 +6,7 @@ import LoadingSpinner from '../Shared/LoadingSpinner';
 
 const AddDoctor = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
-    const { data: services, isLoading } = useQuery('services', () => fetch('http://localhost:5000/services').then(res => res.json()));
+    const { data: services, isLoading } = useQuery('services', () => fetch('https://doctors-portal-2022.herokuapp.com/services').then(res => res.json()));
 
     const iamgeStorageKey = '592b3549595874674f93cdc0a6df1773';
 
@@ -30,7 +30,7 @@ const AddDoctor = () => {
                         img: img
                     }
                     //send to database
-                    fetch('http://localhost:5000/doctor', {
+                    fetch('https://doctors-portal-2022.herokuapp.com/doctor', {
                         method: "POST",
                         headers: {
                             'content-type': 'application/json',
